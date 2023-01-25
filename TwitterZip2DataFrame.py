@@ -7,6 +7,11 @@ import matplotlib.pyplot as plt
 pd.options.display.max_rows = 20
 np.set_printoptions(precision=4, suppress=True)
 
+# Constants 
+NUMBER_OF_CORES =4
+FILTER_LIST=['created_at', 'id', 'lang']
+
+
 userSelectPath = sys.argv[1]
 userSavePath   = sys.argv[2]
 userFileName   = sys.argv[3]
@@ -28,7 +33,7 @@ def openGZip(file_path):
     return filterDataFrame(data) 
 
 def multiProcessGZFiles(files):
-    p =mp.Pool(processes=4)
+    p =mp.Pool(processes=NUMBER_OF_CORES)
     results = []
     for result in tqdm(p.imap(func=openGZip, iterable=files ), total=len(files),
                             desc="processing GZ"):
@@ -40,7 +45,7 @@ def filterDataFrame(data):
     dataFrame = pd.DataFrame(data)
     dataFrame['created_at']= pd.to_datetime(dataFrame['created_at'])
     #return dataFrame[dataFrame.lang=='nl'][['created_at', 'id' ]]
-    return dataFrame[['created_at', 'id','lang']].set_index('created_at')
+    return dataFrame[FILTER_LIST].set_index('created_at')
 
 def processTAR(path):
     tarFiles = []
