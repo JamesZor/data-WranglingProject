@@ -82,15 +82,34 @@ result of which is we have a density of tweets per the hour. This data was plot 
 pandas line plot function. It become clear from the plot that the data contained outliers,
 namely data points that contained less than the mean number of tweets for that time. There
 are a number of reason for these outliers, such as the web-scrapper may not have been
-working correctly for that time period or that the website twitter was down itself. This
-outliers data was removed which resulted in a clear plot of the tweets.
+working correctly for that time period or that the website twitter was down itself. The
+outlining data was removed which resulted in a clear plot of the tweets. Furthermore,
+using the pandas groupby function we can split the data by the twitter supported language,
+in our case we shall be looking at the Dutch tweets `nl'. Again removing outliers we can
+generate a good plot for all Dutch tweets in January 2022.
 \begin{figure}[h!]
     \center
     \includegraphics[scale=0.3]{figures/JanAllraw.jpeg}
     \includegraphics[scale=0.3]{figures/JanAllmod.jpeg}
     \includegraphics[scale=0.3]{figures/JanNLmod.jpeg}
 \end{figure}
-\subsection{Other.}
+
+Since we are looking at discrete time events, we would like to have a better resolution of
+the density of tweets per a time period. We achieve this by selecting again only the
+Dutch tweets and then choosing a smaller time bin, in this case of `2min`, while doing so
+we also choose a smaller range of data, as we have index the dataframe by a Timestamp data
+type, hence we can focus on 14-01-2022. Plotting this we see large fluctuations in the
+data points, making the plot hard to read. The readability can be improved by using the
+pandas rolling function in alignment of the mean function, the result is a smooth rolling
+mean plot of the data.
+
+
+\begin{figure}[h!]
+    \center
+    \includegraphics[scale=0.3]{figures/JanNLD14roll.jpeg}
+    \includegraphics[scale=0.3]{figures/JanNLdayfill.jpeg}
+\end{figure}
+
 \section{Conclusion}
 
 
