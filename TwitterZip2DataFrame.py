@@ -1,4 +1,4 @@
-import os, sys, gzip, json, tarfile, tempfile, shutil
+import os, sys, gzip, json, tarfile, tempfile, shutil, gc
 import multiprocessing as mp
 from tqdm import tqdm
 import numpy as np
@@ -9,7 +9,7 @@ np.set_printoptions(precision=4, suppress=True)
 
 # Constants 
 NUMBER_OF_CORES =4
-FILTER_LIST=['created_at', 'id', 'lang']
+FILTER_LIST=['created_at','lang']
 
 
 userSelectPath = sys.argv[1]
@@ -43,9 +43,9 @@ def multiProcessGZFiles(files):
 
 def filterDataFrame(data):
     dataFrame = pd.DataFrame(data)
-    dataFrame['created_at']= pd.to_datetime(dataFrame['created_at'])
+    #dataFrame['created_at']= pd.to_datetime(dataFrame['created_at'])
     #return dataFrame[dataFrame.lang=='nl'][['created_at', 'id' ]]
-    return dataFrame[FILTER_LIST].set_index('created_at')
+    return dataFrame[FILTER_LIST]
 
 def processTAR(path):
     tarFiles = []
@@ -58,8 +58,13 @@ def processTAR(path):
             dirTempPath = tempfile.mkdtemp()
             currentFile = tarfile.open(file)
             currentFile.extractall(dirTempPath)
+            currentFile.close()
             gzFiles = getFileList( getFileList(dirTempPath)[0] )
-            if i==0:
+            if i%4==0:
+                if i!= 0:
+                    mainData.to_csv(userSavePath+userFileName+str(int(i/5))+".csv")
+                mainData =None 
+                gc.collect()
                 mainData = multiProcessGZFiles(gzFiles)
             else:
                 mainData = pd.concat([mainData, multiProcessGZFiles(gzFiles)])
