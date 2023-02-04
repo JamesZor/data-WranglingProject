@@ -173,11 +173,53 @@ points.
         \caption{Rolling mean of the mean of each 2 min interval, with confidence itervals.} 
         \label{fig:2b}
     \end{subfigure}
+    \caption{whats upppp.}
+    \label{fig:2g}
 \end{figure}
 
 \section{Conclusion}
 
+To test whether the hypothesis state in the open section of this paper has any merit, we
+shall first consider a notable discrete social news event that occurred in January 2022,
+namely the press conference held by the Dutch Health minister on January 14th at 19:00 and
+also the related press conference on January 25th at 19:00, both at local time. The reason
+for choosing these events is that it is a significant event that has the
+impact to affect a lot of peoples lives, hence it will be a good topic for people to
+discuss with each other. As a result we expecting to see an increase in the density of tweets,
+however we are unsure when this will occur, in the build up, during or after the press
+conference. Observe in Figure [$\ref{fig:3a}$] that we do indeed see peaks for both dates,
+which both do look larger than the normal. To check this observation, we broke the day in
+2min intervals, computed the mean and standard deviation for the month, and plotted both
+the 14th and 25th against the rolling mean and $2\times SD$ interval, see Figure
+[$\ref{fig:3b}$]. From Figure [$\ref{fig:3b}$], we see that both times the peak is well
+above a $2\times SD$, which indicates this is not normal behaviour. Furthermore we note
+that the press conference on the $14$th had a slightly larger reaction than the $25$th,
+and in both cases it seems like the peak occur just before the events.  
 
+\begin{figure}[h!]
+    \center
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[scale=0.34]{figures/figNL60AnnoAX.jpeg}
+        \caption{something.}
+        \label{fig:3a}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[scale=0.34]{figures/figNLComp.jpeg}
+        \caption{something.}
+        \label{fig:3b}
+    \end{subfigure}
+\end{figure}
+
+Hence in our limited observation, we do see that there is a correlation between the
+density of tweets created per time interval and world events. However we shall note the
+limitation of these findings due to the small scale. The scope of this paper was limited
+due to software, hardware and time, as processing the large amount of raw tweet data was a
+significant issue thought this investigation. Thus further investigations into this topic
+can perhaps research more world wide events, such as the eruption of Hunga Tonga-Hunga Ha'apai
+volcano on 18th January 2022, which from our data we see a peak, Figure [$\ref{fig:1b}$].
+One could investigate what event occur on around the 21st January 2022, as in both the
+global and Dutch plot we see a large peak, however we were not successful at identify a
+cause for this yet.
 
 
 
