@@ -1,40 +1,47 @@
-\documentclass[9pt]{article}
-\usepackage{amsmath,amssymb,amsthm,enumerate,tikz, subcaption, graphicx, hyperref}
+\documentclass[10pt]{article}
+\usepackage{amsmath,amssymb,amsthm,enumerate,tikz, subcaption, graphicx, hyperref,
+geometry}
 \usetikzlibrary{matrix,arrows}
 
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    right=20mm
+}
 
-\addtolength{\evensidemargin}{-1.5in}
-\addtolength{\oddsidemargin}{-1.5in}
-\addtolength{\textwidth}{2in}
-\addtolength{\textheight}{0.6in}
-\addtolength{\topmargin}{-.2in}
+%\addtolength{\evensidemargin}{-1.5in}
+%\addtolength{\oddsidemargin}{-1.5in}
+%\addtolength{\textwidth}{2in}
+%\addtolength{\textheight}{0.6in}
+\addtolength{\topmargin}{.2in}
 \newcommand{\subjectTitle}{Data wrangling - Project Report}
-\newcommand{\subjectDes}{The relationship between twitter usage and the occurence of
-world events.}
+\newcommand{\subjectDes}{Is there a correlation between twitter usage and the occurrence
+of world events?}
 \newcommand{\name}{James Zoryk.}
 \newcommand{\SID}{$\:$2663347.}
 \newcommand{\hw}{3}
 \newcommand{\ddate}{06.10.2020}
 %% If you want to define a new command, you can do it like this:
 
-\title{\vspace{-130pt}
+\title{\vspace{}
 \huge \subjectTitle  \\ 
 \vspace{10pt} \large \subjectDes 
-\\ \vspace{10pt} \large \\ Group Members: \\
+\\ \vspace{10pt} \large \\ \textbf{Group Members:} \\
 \begin{tabular}{c c c}
-    James Zoryk & Sanne Petersen & Nicolina \\
-    jzk340 & spn239 &id3 
+    James Zoryk & Sanne Petersen & Nikolina Micek  \\
+    jzk340 & spn239 & nmk490 
 \end{tabular}}
 \date{}
 \pagestyle{myheadings}
-%%\markright{\name \SID \hfill Assignment \hw \hfill}
+\markright{Group: 73 - Data Wrangling.}
 
 
 
 \begin{document}
 \maketitle{}
 
-\section{Research Question}
+\section{Research Question.}
 In this paper we shall investigate to see if there is any correlation between the density
 of social media posts per a given time interval against discrete events in the news.
 We hypothesis that a significant increase in the density for a giving time period shall
@@ -73,13 +80,13 @@ can be accessed via our
 page, along with all other files related to this paper, including all figures.
 
 
-\section{Data Wrangling methods}
+\section{Data Wrangling methods.}
 \subsection{Getting the Data.}
 Using the link provided in the Data Source part, the raw twitter data for the given can be
 downloaded. This download file contains multiply \texttt{tar} files, which inside each
 then contains approximately 1440 \texttt{gz} compressed \texttt{json} files. The
 \texttt{json} files held more information than we required for this project, hence we need
-to extract only the two following fields \emph{'created\_at'} and \emph{'lang'}, the first
+to extract only the two following fields \emph{`created\_at'} and \emph{`lang'}, the first
 giving us the
 time the tweet was posted to the website and the second gives us information about the
 user language it was written in. Note that twitter supports $34$ languages, with more
@@ -105,9 +112,10 @@ data can be found at
 \subsection{Processing and visualising the data.}
 The first task here is to get a better understanding of the data, in order to achieve this
 we wish to plot all the data into a line plot, with time along the x-axis and the density
-of tweets for the y-axis. Therefore we had to group all the tweet data into 1 hour bin of
+of tweets for the y-axis. Therefore we had to group all the tweet data into 1 hour
+interval of
 posting their time, this was achieved by using pandas to convert the timeformat into
-timestamp data types for the `created\_at' column and then using the pandas groupby function with specific options. The
+timestamp data types for the \emph{`created\_at'} column and then using the pandas groupby function with specific options. The
 result of which is we have a density of tweets per the hour. This data was plot by using
 pandas line plot function, this can be seen in Figure [$\ref{fig:1a}$]. It become clear from the plot that the data contained outliers,
 namely data points that contained less than the expected number of tweets for that time. There
@@ -123,21 +131,23 @@ generate a good plot for all Dutch tweets, see Figure [$\ref{fig:1c}$].
 \begin{figure}[h!]
     \center
     \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{figures/JanAllraw.jpeg}
-        \caption{Raw data.}
+        \includegraphics[scale=0.34]{figures/JanAllraw.jpeg}
+        \caption{Raw
+        data.(\href{https://github.com/JamesZor/data-WranglingProject/blob/main/figures/JanAllraw.jpeg}{\color{blue}\textbf{link}})}
         \label{fig:1a}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[scale=0.3]{figures/JanAllmod.jpeg}
-        \caption{Outliers removed.}
+        \includegraphics[scale=0.34]{figures/JanAllmod.jpeg}
+        \caption{Outliers removed. (\href{https://github.com/JamesZor/data-WranglingProject/blob/main/figures/JanAllmod.jpeg}{\color{blue}\textbf{link}})}
         \label{fig:1b}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[scale=0.3]{figures/JanNLmod.jpeg}
-        \caption{Dutch data, outliers removed.}
+        \includegraphics[scale=0.34]{figures/JanNLmod.jpeg}
+        \caption{Dutch data, outliers
+        removed.(\href{https://github.com/JamesZor/data-WranglingProject/blob/main/figures/JanNLmod.jpeg}{\color{blue}\textbf{link}})}
         \label{fig:1c}
     \end{subfigure}
-    \caption{Line plots of density of tweets per 60min intervals.}
+    \caption{}
     \label{fig:g1}
 \end{figure}
 
@@ -164,25 +174,27 @@ points.
 \begin{figure}[h!]
     \center
     \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[scale=0.3]{figures/JanNLD14roll.jpeg}
-        \caption{2min intervals, with rolling mean.} 
+        \center
+        \includegraphics[scale=0.45]{figures/JanNLD14roll.jpeg}
+        \caption{2min intervals, with rolling mean.(\href{https://github.com/JamesZor/data-WranglingProject/blob/main/figures/JanNLD14roll.jpeg}{\color{blue}\textbf{link}})} 
         \label{fig:2a}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[scale=0.3]{figures/JanNLdayfill.jpeg}
-        \caption{Rolling mean of the mean of each 2 min interval, with confidence itervals.} 
+        \center
+        \includegraphics[scale=0.45]{figures/JanNLdayfill.jpeg}
+        \caption{Rolling mean of the mean of each 2 min interval, with confidence intervals.(\href{https://github.com/JamesZor/data-WranglingProject/blob/main/figures/JanNLdayfill.jpeg}{\color{blue}\textbf{link}})} 
         \label{fig:2b}
     \end{subfigure}
-    \caption{whats upppp.}
+    \caption{}
     \label{fig:2g}
 \end{figure}
 
-\section{Conclusion}
+\section{Conclusion.}
 
-To test whether the hypothesis state in the open section of this paper has any merit, we
-shall first consider a notable discrete social news event that occurred in January 2022,
+To test whether the hypothesis state in the opening section of this paper has any merit, we
+shall first consider a notable discrete social news events that occurred in January 2022,
 namely the press conference held by the Dutch Health minister on January 14th at 19:00 and
-also the related press conference on January 25th at 19:00, both at local time. The reason
+also the related press conference on January 25th at 19:00, both at local time CET. The reason
 for choosing these events is that it is a significant event that has the
 impact to affect a lot of peoples lives, hence it will be a good topic for people to
 discuss with each other. As a result we expecting to see an increase in the density of tweets,
@@ -199,15 +211,19 @@ and in both cases it seems like the peak occur just before the events.
 \begin{figure}[h!]
     \center
     \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[scale=0.34]{figures/figNL60AnnoAX.jpeg}
-        \caption{something.}
+        \center
+        \includegraphics[scale=0.45]{figures/figNL60AnnoAX.jpeg}
+        \caption{Dutch tweets with dates  marked.(\href{https://github.com/JamesZor/data-WranglingProject/blob/main/figures/figNL60AnnoAX.jpeg}{\color{blue}\textbf{link}})}
         \label{fig:3a}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[scale=0.34]{figures/figNLComp.jpeg}
-        \caption{something.}
+        \center
+        \includegraphics[scale=0.45]{figures/figNLComp.jpeg}
+        \caption{Comparing 14th and 25th.(\href{https://github.com/JamesZor/data-WranglingProject/blob/main/figures/figNLComp.jpeg}{\color{blue}\textbf{link}})}
         \label{fig:3b}
     \end{subfigure}
+    \caption{}
+    \label{fig:3g}
 \end{figure}
 
 Hence in our limited observation, we do see that there is a correlation between the
