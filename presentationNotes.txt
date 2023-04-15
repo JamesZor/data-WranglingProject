@@ -1,0 +1,60 @@
+== Notes ==
+
+===== Getting the data: processing the raw data
+Our first task was to write a python script to extract the relevant data from the
+raw data.
+
+Here is the flow diagram of the function.
+
+From the downloaded file we extract one tar file at a time into a temporary file due to
+the size, which then gives us approximately 1440 gz compressed json files.
+
+In order to speed up the process we used python libraries to run multiprocess to
+process 4 json files at once. The processing was extracting the time created and
+language from the raw data.   
+
+Looping through all 31 tar file from the download and then save the dataframe to disk,
+which reduce it down from 70 gb to less than 7 gb.
+
+= Visualising the data 1:
+First we want to see the lay of the data, so we group the tweets into 1 hour intervals
+and plotted the results as you cna see in the figure here.
+
+This is the kind of plot we had hoped for.
+
+Here we notice that it is not the readable due to the outliers.
+
+===== Visualising the data 2:
+
+We classified outliers as data point that had zero as the number of tweets, this
+occurred when either twitter was down or when the web scrapped had an issue.
+
+Removing this null data points leaves us with a much clear plot as you can see.
+
+===== Visualising the data 3:
+Since we are focusing on local news, namely dutch events we can filter just the tweets
+that are in dutch, since it is one of the support languages of twitter.
+
+Here we also added markers to the date of the two dutch government press conferences
+regarding covid lock downs.
+noting that we do see a peak in both cases, but now need to quantify this observation.
+
+========= Visualising the data 4:
+We increase the resolution of the plot to 2 minute intervals and observing the data of a
+day, the example here is the 14th.
+
+However, we find that this makes the data hard to read so we use the rolling mean, with
+a window size of 20 data points. Which we see gives a smoother graph.
+
+
+========= Visualising the data 4:
+We would like to compare the two days of the press conference to the monthly mean.
+Hence, we broke each day in the month of January into 2 mins intervals and computed the
+mean and standard deviation.
+Again, this is hard to read so we took the rolling average of both, which you can see in
+the plot here.
+The shaded area is plus/minus 2 standard deviation from the mean
+
+
+
+
